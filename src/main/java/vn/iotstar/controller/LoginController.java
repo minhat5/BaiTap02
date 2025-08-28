@@ -15,22 +15,9 @@ import java.io.IOException;
  * Servlet implementation class LoginController
  */
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = {"/login"})
+@WebServlet(urlPatterns = "/login")
 public class LoginController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public LoginController() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -50,13 +37,10 @@ public class LoginController extends HttpServlet {
 				}
 			}
 		}
-		request.getRequestDispatcher("views/login.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/login.jsp").forward(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html");
@@ -73,7 +57,7 @@ public class LoginController extends HttpServlet {
 		if (username.isEmpty() || password.isEmpty()) {
 			alertMsg = "Tài khoản hoặc mật khẩu không được rỗng";
 			request.setAttribute("alert", alertMsg);
-			request.getRequestDispatcher("/login.jsp").forward(request, response);
+			request.getRequestDispatcher("/views/login.jsp").forward(request, response);
 			return;
 		}
 		UserServiceImpl service = new UserServiceImpl();
@@ -88,7 +72,7 @@ public class LoginController extends HttpServlet {
 		} else {
 			alertMsg = "Tài khoản hoặc mật khẩu không đúng";
 			request.setAttribute("alert", alertMsg);
-			request.getRequestDispatcher("/login.jsp").forward(request, response);
+			request.getRequestDispatcher("/views/login.jsp").forward(request, response);
 		}
 	}
 	
