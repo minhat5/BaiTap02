@@ -23,7 +23,6 @@ public class LogoutController extends HttpServlet {
 		if (session != null)
 			session.invalidate();
 
-		// Xóa cookie remember nếu có
 		Cookie cookie = new Cookie(Constant.COOKIE_REMEMBER, "");
 		cookie.setMaxAge(0);
 		cookie.setPath(req.getContextPath());

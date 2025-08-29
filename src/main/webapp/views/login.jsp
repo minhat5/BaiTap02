@@ -30,7 +30,7 @@
 
         <div class="options">
             <label><input type="checkbox" name="remember"> Nhớ tôi</label>
-            <a href="forgotPassword.jsp">Quên mật khẩu?</a>
+            <a href="${pageContext.request.contextPath}/forgotPassword">Quên mật khẩu?</a>
         </div>
 
         <button type="submit" class="btn-login">Đăng nhập</button>
