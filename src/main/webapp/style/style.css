@@ -1,76 +1,330 @@
+/* =========================
+   RESET & BASE
+   ========================= */
+* {
+	box-sizing: border-box;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background: #f5f7fa;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+	font-family: Arial, sans-serif;
+	background: linear-gradient(135deg, #74b9ff, #a29bfe);
+	min-height: 100vh;
+	color: #2d3436;
+}
+
+/* Một lớp đệm cho toàn bộ page để tránh topbar che nội dung.
+   Dùng .page bọc nội dung mỗi trang (index, home, admin...). */
+.page {
+	padding-top: 72px; /* >= chiều cao topbar */
+}
+
+/* =========================
+   TOPBAR (CỐ ĐỊNH TRÊN CÙNG)
+   ========================= */
+.topbar {
+	position: fixed; /* luôn ở trên cùng, kể cả khi cuộn */
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1000;
+	background: #2d3436;
+	color: #fff;
+	padding: 12px 20px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, .2);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+}
+
+.topbar__left, .topbar__right {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+.logo {
+	display: inline-block;
+	font-weight: 700;
+	font-size: 20px;
+	color: #fff;
+	text-decoration: none;
+	margin-right: 8px;
+}
+
+.main-nav {
+	list-style: none;
+	display: flex;
+	gap: 16px;
+	padding: 0;
+	margin: 0;
+}
+
+.main-nav a {
+	color: #fff;
+	text-decoration: none;
+	font-weight: 500;
+	padding: 6px 10px;
+	border-radius: 6px;
+	transition: background .2s ease, color .2s ease;
+}
+
+.main-nav a:hover {
+	background: rgba(255, 255, 255, .1);
+}
+
+/* Nút icon (ví dụ search) */
+.icon-btn {
+	background: transparent;
+	border: 0;
+	cursor: pointer;
+	padding: 6px 8px;
+	border-radius: 8px;
+	transition: background .2s ease, transform .05s ease;
+	color: #fff;
+	font-size: 16px;
+}
+
+.icon-btn:hover {
+	background: rgba(255, 255, 255, .1);
+}
+
+.icon-btn:active {
+	transform: translateY(1px);
+}
+
+/* Form tìm kiếm trên topbar */
+.search-form {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	background: #fff;
+	padding: 6px 8px;
+	border-radius: 10px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, .12);
+}
+
+.search-form.is-hidden {
+	display: none;
+}
+
+.search-form input[type="text"] {
+	border: none;
+	outline: none;
+	padding: 8px 6px;
+	min-width: 220px;
+	color: #2d3436;
+}
+
+.search-form .btn {
+	border: none;
+	background: #0984e3;
+	color: #fff;
+	padding: 8px 12px;
+	border-radius: 8px;
+	cursor: pointer;
+	font-weight: 600;
+	transition: opacity .15s ease, transform .05s ease;
+}
+
+.search-form .btn:hover {
+	opacity: .9;
+}
+
+.search-form .btn:active {
+	transform: translateY(1px);
+}
+
+/* Liên kết đăng nhập/đăng ký/đăng xuất */
+.auth-links {
+	list-style: none;
+	display: flex;
+	gap: 14px;
+	margin: 0;
+	padding: 0;
+}
+
+.auth-links a {
+	color: #fff;
+	text-decoration: none;
+	font-weight: 500;
+	padding: 6px 10px;
+	border-radius: 6px;
+	transition: background .2s ease, color .2s ease;
+}
+
+.auth-links a:hover {
+	background: rgba(255, 255, 255, .1);
+}
+
+/* =========================
+   LAYOUT CHUNG CHO NỘI DUNG
+   ========================= */
+.container {
+	padding: 40px 20px;
+	display: flex;
+	justify-content: center;
+}
+
+.card {
+	background: #fff;
+	border-radius: 12px;
+	padding: 28px;
+	width: min(760px, 92vw);
+	box-shadow: 0 10px 24px rgba(0, 0, 0, .16);
+	text-align: center;
+}
+
+.card h1, .card h2 {
+	margin-top: 0;
+	color: #2d3436;
+}
+
+.card p {
+	color: #636e72;
+}
+
+/* =========================
+   TRANG LOGIN (chỉ căn giữa khu vực login, KHÔNG căn giữa toàn body)
+   ========================= */
+.login-page {
+	min-height: calc(100vh - 72px); /* trừ chiều cao topbar */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 24px 16px;
 }
 
 .login-container {
-    background: white;
-    padding: 30px 40px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    width: 350px;
-    text-align: center;
+	background: #fff;
+	padding: 30px 40px;
+	border-radius: 10px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+	width: 350px;
+	text-align: center;
 }
 
 .login-container h2 {
-    margin-bottom: 20px;
-    color: #333;
+	margin-bottom: 20px;
+	color: #333;
 }
 
 .input-group {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    overflow: hidden;
+	display: flex;
+	align-items: center;
+	margin-bottom: 15px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	overflow: hidden;
 }
 
 .input-group-addon {
-    background: #f1f1f1;
-    padding: 10px;
-    color: #555;
+	background: #f1f1f1;
+	padding: 10px;
+	color: #555;
 }
 
 .input-group input {
-    border: none;
-    padding: 10px;
-    flex: 1;
-    outline: none;
+	border: none;
+	padding: 10px;
+	flex: 1;
+	outline: none;
 }
 
 .options {
-    display: flex;
-    justify-content: space-between;
-    font-size: 14px;
-    margin-bottom: 15px;
+	display: flex;
+	justify-content: space-between;
+	font-size: 14px;
+	margin-bottom: 15px;
 }
 
 .btn-login {
-    width: 100%;
-    padding: 10px;
-    background: #0099ff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+	width: 100%;
+	padding: 10px;
+	background: #0099ff;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 16px;
 }
 
 .btn-login:hover {
-    background: #007acc;
+	background: #007acc;
 }
 
 .register-text {
-    margin-top: 20px;
-    font-size: 14px;
+	margin-top: 20px;
+	font-size: 14px;
 }
 
 .alert {
-    color: red;
-    margin-bottom: 15px;
+	color: red;
+	margin-bottom: 15px;
+}
+
+/* ===== Profile ===== */
+.profile-card {
+	text-align: left;
+}
+
+.profile-header {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	margin-bottom: 16px;
+}
+
+.avatar {
+	width: 84px;
+	height: 84px;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 3px solid #eee;
+}
+
+.profile-body .row {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px 0;
+	border-bottom: 1px solid #f1f1f1;
+}
+
+.profile-body .label {
+	color: #636e72;
+}
+
+.profile-actions {
+	margin-top: 18px;
+	display: flex;
+	gap: 10px;
+}
+
+.profile-actions .btn {
+	background: #0984e3;
+	color: #fff;
+	padding: 10px 14px;
+	border-radius: 8px;
+	text-decoration: none;
+}
+
+.profile-actions .btn:hover {
+	opacity: .9;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+@media ( max-width : 768px) {
+	.main-nav {
+		display: none;
+	} /* tạm ẩn menu nếu chưa làm mobile menu */
+	.search-form input[type="text"] {
+		min-width: 150px;
+	}
 }

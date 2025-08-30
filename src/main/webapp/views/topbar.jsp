@@ -1,34 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<c:choose>
-		<c:when test="${sessionScope.account == null}">
-			<div class="col-sm-6">
-				<ul class="list-inline right-topbar pull-right">
-					<li><a href="${pageContext.request.contextPath }/login">Đăng
-							nhập</a> | <a href="${pageContext.request.contextPath }/register">Đăng
-							ký</a></li>
-					<li><i class="search fa fa-search search-button"></i></li>
+
+<c:set var="cxt" value="${pageContext.request.contextPath}" />
+
+<header class="topbar">
+	<div class="topbar__left">
+		<a class="logo" href="${cxt}/">MyApp</a>
+		<nav>
+			<ul class="main-nav">
+				<li><a href="${cxt}/">Trang chủ</a></li>
+			</ul>
+		</nav>
+	</div>
+
+	<div class="topbar__right">
+		<c:choose>
+			<c:when test="${sessionScope.account == null}">
+				<ul class="auth-links">
+					<li><a href="${cxt}/login">Đăng nhập</a></li>
+					<li><a href="${cxt}/register">Đăng ký</a></li>
 				</ul>
-			</div>
-		</c:when>
-		<c:otherwise>
-			<div class="col-sm-6">
-				<ul class="list-inline right-topbar pull-right">
-					<li><a href="${pageContext.request.contextPath }">${sessionScope.account.fullName}</a>
-						| <a href="${pageContext.request.contextPath }/logout">Đăng
-							Xuất</a></li>
-					<li><i class="search fa fa-search search-button"></i></li>
+			</c:when>
+			<c:otherwise>
+				<ul class="auth-links">
+					<li><a href="${cxt}/profile" title="Trang cá nhân">
+							${sessionScope.account.fullName} </a></li>
+					<li><a href="${cxt}/logout">Đăng xuất</a></li>
 				</ul>
-			</div>
-		</c:otherwise>
-	</c:choose>
-</body>
-</html>
+			</c:otherwise>
+		</c:choose>
+	</div>
+</header>

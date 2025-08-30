@@ -1,15 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/style/style.css">
 </head>
 <body>
-	<jsp:include page="topbar.jsp" />
+    <%@ include file="topbar.jsp" %>
 
-	<h2>Xin chào ${sessionScope.account.fullName}</h2>
-	<p>Đây là trang chính của người dùng.</p>
+    <div class="container">
+        <div class="page">
+            <h2>Xin chào, ${username}!</h2>
+            <p>Bạn đã đăng nhập thành công. Đây là trang dành cho người dùng sau khi login.</p>
+        </div>
+    </div>
 </body>
 </html>
